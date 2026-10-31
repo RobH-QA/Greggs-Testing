@@ -4,7 +4,9 @@
 
 8 specs · 48 tests × 2 projects · about 1 minute locally
 
-A Playwright + TypeScript test suite for the Menu section of [greggs.com](https://www.greggs.com/menu)
+A Playwright + TypeScript test suite for the Menu section of [greggs.com](https://www.greggs.com/menu).
+
+The brief names Greggs.com; greggs.co.uk redirects there, so the suite tests https://www.greggs.com.
 
 ## Testing Purpose
 
