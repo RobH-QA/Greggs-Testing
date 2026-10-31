@@ -44,6 +44,17 @@ npx playwright codegen <url>             # record locators against the live site
 - `tests/pages/menu.page.ts` is a thin page object containing locators and a few helpers.
 - Product cards are located by `[data-test-card]`, an intentional exception to the role-locator rule. Every view also contains a "Greggs App" promo `h2`, which `sectionHeadings` filters out. Headings look upper-case on screen because of CSS, so match on their title-case accessible names.
 
+## Findings
+
+Observed on the live site on 2026-10-31.
+
+- **Observation (not a defect):** category checkboxes in the filter modal filter the cards but don't add to the "Filter results" badge. Only allergen and calorie filters count. Don't assert a badge for category filters.
+- **Accessibility defect:** "Clear all" in the filter modal is styled as disabled (`disabled` class, `pointer-events-none`) when nothing is selected, but has no `disabled` or `aria-disabled` attribute. Screen readers announce it as enabled, and a Playwright click waits until it times out.
+- **Accessibility defect:** the filter modal (`role="dialog"`) has no accessible name.
+- **Accessibility defect:** the filter modal's close button is an icon with no accessible name.
+- **Accessibility defect:** the "Filter results" button doesn't expose `aria-expanded` when the modal opens or closes.
+- **Accessibility defect:** each product card link's accessible name repeats the product name (e.g. "Bacon Breakfast Roll Bacon Breakfast Roll"), because the image alt text and the `h3` are both read out.
+
 ## CI
 
 `.github/workflows/playwright.yml` runs `npx playwright test` on push and PR to `main`/`master` (Ubuntu, Node LTS) and uploads `playwright-report/` as an artifact kept for 30 days.
