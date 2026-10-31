@@ -10,8 +10,9 @@ const KNOWN_SERIOUS = [
 async function scan(page: Page, testInfo: TestInfo) {
   /* The OneTrust banner fades out after "Accept all cookies"; scanning mid-fade reports its buttons */
   await expect(page.getByRole('dialog', { name: 'Privacy' })).toBeHidden();
-  /* Client-side route changes fade content in; mid-transition colours read as false contrast failures */
-  await page.evaluate(() => Promise.all(document.getAnimations().map((animation) => animation.finished)));
+  /* Client-side route changes fade content in; mid-transition colours read as false contrast failures.
+     allSettled because `finished` rejects with AbortError when the site cancels an animation mid-run */
+  await page.evaluate(() => Promise.allSettled(document.getAnimations().map((animation) => animation.finished)));
   const results = await new AxeBuilder({ page }).analyze();
   await testInfo.attach('axe-results', { body: JSON.stringify(results.violations, null, 2), contentType: 'application/json' });
 
