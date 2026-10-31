@@ -55,7 +55,10 @@ Observed on the live site on 2026-10-31.
 - **Accessibility defect:** the filter modal (`role="dialog"`) has no accessible name.
 - **Accessibility defect:** the filter modal's close button is an icon with no accessible name.
 - **Accessibility defect:** the "Filter results" button doesn't expose `aria-expanded` when the modal opens or closes.
-- **Accessibility defect:** each product card link's accessible name repeats the product name (e.g. "Bacon Breakfast Roll Bacon Breakfast Roll"), because the image alt text and the `h3` are both read out.
+- **Accessibility defect:** each product card link's accessible name repeats the product name (e.g. "Bacon Breakfast Roll Bacon Breakfast Roll"), because the image alt text and the `h3` are both read out. The 143 `image-redundant-alt` (minor) results axe reports on `/menu`, one per card, have the same root cause: the alt text repeats the card's `h3`. Fixing it once, for example with an empty `alt` on the decorative card image, clears both.
+- **Accessibility defect (axe serious):** the "Delivery" tile in the ways-to-order strip on `/menu` and product pages fails `color-contrast`: white on `#4dabe9` is 2.52:1, below the 3:1 needed for large text. It's allowlisted by rule and text in the axe scans in `accessibility.spec.ts`, so any new serious violation still fails, and it also has its own `test.fail()` in the known-findings group.
+- **Accessibility defect:** the mobile header "Menu" button doesn't expose `aria-expanded` when the nav opens.
+- **Observation (not a defect):** on mobile (Pixel 5, 393px) the card grid is 2 columns, not 1. `responsive.spec.ts` asserts fewer columns than at the desktop viewport, not an exact number.
 
 ## CI
 

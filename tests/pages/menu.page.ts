@@ -31,6 +31,14 @@ export class MenuPage {
   readonly emptyState: Locator;
   /* The filter modal has no accessible name, so identify it by its "Filters" heading */
   readonly filtersDialog: Locator;
+  /* Icon-only and unnamed, so it can only be located as the dialog's first button */
+  readonly filtersCloseButton: Locator;
+  readonly clearAllButton: Locator;
+  readonly mainNav: Locator;
+  /* Mobile-only hamburger; it is display:none at the desktop header breakpoint */
+  readonly headerMenuButton: Locator;
+  /* The pills' immediate parent is the horizontally scrolling container */
+  readonly pillRow: Locator;
 
   constructor(readonly page: Page) {
     this.main = page.getByRole('main');
@@ -43,6 +51,12 @@ export class MenuPage {
       .filter({ hasNotText: /could not find any products/i });
     this.emptyState = this.main.getByText('Oops... we could not find any products matching your criteria');
     this.filtersDialog = page.getByRole('dialog').filter({ has: page.getByRole('heading', { name: 'Filters' }) });
+    this.filtersCloseButton = this.filtersDialog.getByRole('button').first();
+    this.clearAllButton = this.filtersDialog.getByRole('button', { name: 'Clear all' });
+    const header = page.getByRole('banner').first();
+    this.mainNav = header.getByRole('navigation', { name: 'Main site navigation' });
+    this.headerMenuButton = header.getByRole('button', { name: 'Menu', exact: true });
+    this.pillRow = this.categoryPill('All').locator('xpath=..');
   }
 
   categoryPill(name: Category): Locator {
@@ -95,6 +109,14 @@ export class MenuPage {
   async openFilters() {
     await this.filterButton.click();
     await this.filtersDialog.waitFor({ state: 'visible' });
+    /* The modal slides in for ~300ms; wait until its position stops changing */
+    let previous = '';
+    for (let i = 0; i < 20; i++) {
+      const box = JSON.stringify(await this.filtersDialog.boundingBox());
+      if (box === previous) break;
+      previous = box;
+      await this.page.waitForTimeout(100);
+    }
   }
 
   /* Matches allergen labels ("No Milk") and category labels with their count suffix ("Breakfast (19)") */
@@ -129,7 +151,14 @@ export class MenuPage {
 
   /* "Clear all" applies immediately and leaves the modal open. It is only clickable once an option is selected */
   async clearAllFilters() {
-    await this.filtersDialog.getByRole('button', { name: 'Clear all' }).click();
+    await this.clearAllButton.click();
+  }
+
+  /* Number of grid columns, counted as the cards sharing the first card's row */
+  async cardColumnCount(): Promise<number> {
+    const tops = await this.productCards.evaluateAll((cards) =>
+      cards.slice(0, 8).map((card) => Math.round(card.getBoundingClientRect().top)));
+    return tops.filter((top) => top === tops[0]).length;
   }
 
   /* The badge is an unlabelled span inside the button, so read it from the button's text ("Filter results1") */
