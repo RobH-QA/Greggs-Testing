@@ -6,16 +6,16 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robslab91-alt/Greggs-Testing.git"
+    "url": "git+https://github.com/RobH-QA/Greggs-Testing.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/robslab91-alt/Greggs-Testing/issues"
+    "url": "https://github.com/RobH-QA/Greggs-Testing/issues"
   },
-  "homepage": "https://github.com/robslab91-alt/Greggs-Testing#readme",
+  "homepage": "https://github.com/RobH-QA/Greggs-Testing#readme",
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
     "@playwright/test": "^1.64.1",
