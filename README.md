@@ -6,8 +6,6 @@
 
 A Playwright + TypeScript test suite for the Menu section of [greggs.com](https://www.greggs.com/menu).
 
-The brief names Greggs.com; greggs.co.uk redirects there, so the suite tests https://www.greggs.com.
-
 ## Testing Purpose
 
 Making sure the only thing flaky is the pastry.
