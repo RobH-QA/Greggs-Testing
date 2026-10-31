@@ -6,3 +6,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Committed copy of a local HTML report (the generated /playwright-report/ above stays ignored)
+!/docs/html-report/
