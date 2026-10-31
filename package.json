@@ -1,0 +1,24 @@
+{
+  "name": "greggs-testing",
+  "version": "1.0.0",
+  "description": "Playwright test suite for the Greggs menu. Making sure the only thing flaky is the pastry",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robslab91-alt/Greggs-Testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/robslab91-alt/Greggs-Testing/issues"
+  },
+  "homepage": "https://github.com/robslab91-alt/Greggs-Testing#readme",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.6"
+  }
+}
