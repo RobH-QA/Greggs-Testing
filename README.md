@@ -139,4 +139,6 @@ These were working assumptions made during planning. Each one was checked agains
 
 Latest local run: [docs/test-output.txt](docs/test-output.txt) · [docs/html-report/index.html](docs/html-report/index.html) (download and open locally)
 
+Same run as a spreadsheet or PDF: [docs/test-results.xlsx](docs/test-results.xlsx) · [docs/test-results.pdf](docs/test-results.pdf)
+
 CI runs: [Playwright Tests workflow](https://github.com/RobH-QA/Greggs-Testing/actions/workflows/playwright.yml). Open the latest run and download its `playwright-report` artifact to view the full HTML report.
