@@ -137,4 +137,4 @@ These were working assumptions made during planning. The brief doesn't state the
 
 ![Playwright HTML report](docs/report.png)
 
-Latest passing CI run: [run #7](https://github.com/RobH-QA/Greggs-Testing/actions/runs/41237759144). Download its `playwright-report` artifact to view the full HTML report.
+CI runs: [Playwright Tests workflow](https://github.com/RobH-QA/Greggs-Testing/actions/workflows/playwright.yml). Open the latest run and download its `playwright-report` artifact to view the full HTML report.
