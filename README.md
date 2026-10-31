@@ -63,6 +63,8 @@ Making sure the only thing flaky is the pastry.
 - **Known defects use `test.fail()`.**
   - Each known accessibility defect has a test that asserts the correct behaviour and is marked `test.fail()`, with the finding as its annotation.
   - The suite stays green while the defects exist. When one is fixed, Playwright reports that test as "expected to fail but passed", which is the cue to remove the marker.
+- **Built with Claude Code.**
+  - Test strategy, scope, and review decisions are mine; the Findings and Assumptions sections document where I overruled it.
 
 ## How to run
 
