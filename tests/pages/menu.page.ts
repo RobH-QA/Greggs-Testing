@@ -11,6 +11,16 @@ export const CATEGORIES = [
 
 export type Category = (typeof CATEGORIES)[number] | 'All';
 
+/* Values the category pills set for ?category= */
+export const CATEGORY_SLUGS: Record<(typeof CATEGORIES)[number], string> = {
+  'Breakfast': 'breakfast',
+  'Savouries & Bakes': 'savouries-bakes',
+  'Drinks & Snacks': 'drinks-snacks',
+  'Sandwiches & Salads': 'sandwiches-salads',
+  'Sweet Treats': 'sweet-treats',
+  'Hot Food': 'hot-food',
+};
+
 export class MenuPage {
   readonly main: Locator;
   readonly searchBox: Locator;
@@ -92,6 +102,24 @@ export class MenuPage {
     await this.filtersDialog
       .getByRole('checkbox', { name: new RegExp(`^${escapeRegExp(label)}( \\(\\d+\\))?$`) })
       .check();
+  }
+
+  /* "Back" is hidden below the md breakpoint and the close icon has no name, so Escape is the one route that works on both projects */
+  async closeFilters() {
+    await this.page.keyboard.press('Escape');
+    await this.filtersDialog.waitFor({ state: 'hidden' });
+  }
+
+  /* Reads the "(n)" suffix from each category checkbox label, e.g. "Breakfast (19)" */
+  async readCategoryCounts(): Promise<Record<(typeof CATEGORIES)[number], number>> {
+    const counts = {} as Record<(typeof CATEGORIES)[number], number>;
+    for (const category of CATEGORIES) {
+      const label = await this.filtersDialog
+        .getByText(new RegExp(`^\\s*${escapeRegExp(category)} \\(\\d+\\)\\s*$`))
+        .textContent();
+      counts[category] = Number(label?.match(/\((\d+)\)/)?.[1]);
+    }
+    return counts;
   }
 
   async applyFilters() {

@@ -41,7 +41,9 @@ npx playwright codegen <url>             # record locators against the live site
 ## Test structure
 
 - `tests/fixtures.ts` exports `test` and `expect`. Specs import from here, not from `@playwright/test`. The `menuPage` fixture opens `/menu`, accepts cookies if the banner shows within 5s, and waits for a product card.
-- `tests/pages/menu.page.ts` is a thin page object containing locators and a few helpers.
+- `tests/pages/menu.page.ts` and `tests/pages/product.page.ts` are thin page objects containing locators and helpers only. Assertions stay in specs. `CATEGORIES` and `CATEGORY_SLUGS` live in `menu.page.ts`.
+- `tests/helpers/parse.ts` pulls numbers out of display text (`"Fat12g17%"`, `"283kcal"`). Use it for any nutrition comparison instead of string-matching values.
+- Card images are lazy-loaded: scroll each card into view before checking `naturalWidth`. The filter modal's "Back" button is hidden on mobile, so `closeFilters()` presses Escape.
 - Product cards are located by `[data-test-card]`, an intentional exception to the role-locator rule. Every view also contains a "Greggs App" promo `h2`, which `sectionHeadings` filters out. Headings look upper-case on screen because of CSS, so match on their title-case accessible names.
 
 ## Findings

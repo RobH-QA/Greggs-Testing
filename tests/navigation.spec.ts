@@ -1,14 +1,5 @@
 import { test, expect } from './fixtures';
-import { CATEGORIES } from './pages/menu.page';
-
-const CATEGORY_SLUGS: Record<(typeof CATEGORIES)[number], string> = {
-  'Breakfast': 'breakfast',
-  'Savouries & Bakes': 'savouries-bakes',
-  'Drinks & Snacks': 'drinks-snacks',
-  'Sandwiches & Salads': 'sandwiches-salads',
-  'Sweet Treats': 'sweet-treats',
-  'Hot Food': 'hot-food',
-};
+import { CATEGORIES, CATEGORY_SLUGS } from './pages/menu.page';
 
 test.describe('Menu navigation', () => {
   test('menu loads with h1 and product cards', async ({ menuPage }) => {
