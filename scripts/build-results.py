@@ -157,7 +157,7 @@ for spec in [s + '.spec.ts' for s in SPEC_ORDER]:
 summary.cell(row + 1, 1, 'Total duration is summed per test; tests ran in parallel, so it exceeds the wall-clock time.').font = Font(name=FONT, italic=True, color='595959')
 
 wb.calculation.fullCalcOnLoad = True
-wb.save(fr'{REPO}\docs\test-results.xlsx')
+wb.save(DOCS / 'test-results.xlsx')
 
 # ---------- html for pdf ----------
 e = html.escape
