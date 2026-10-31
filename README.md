@@ -90,8 +90,6 @@ To find the report, open the repository's **Actions** tab, select a run, and dow
 
 ## Findings
 
-Observed on the live site on 2026-10-31.
-
 ### Accessibility defects
 
 1. **"Delivery" tile colour contrast (axe serious).** The tile in the ways-to-order strip on `/menu` and product pages has white text on `#4dabe9`, a ratio of 2.52:1. Large text needs at least 3:1. *Tracked with `test.fail()`.*
@@ -118,7 +116,7 @@ Observed on the live site on 2026-10-31.
 
 ### Assumptions corrected during recon
 
-These were working assumptions made during planning. The brief doesn't state them. Each one was checked against the site before tests were written.
+These were working assumptions made during planning. Each one was checked against the site before tests were written.
 
 - **Mobile grid would be a single column.** It's 2 columns at 393px, so the test asserts fewer columns than at the desktop viewport.
 - **Ticking a category would add to the "Filter results" badge.** Only allergen and calorie filters do, so the badge is asserted after "No Milk" instead.
